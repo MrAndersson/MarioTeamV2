@@ -1,0 +1,313 @@
+<!--
+    TEAM MARIO PAGE VERSION 1
+-->
+
+<div class="container" *ngIf="false">
+
+  <div class="header">
+      <!-- <app-squares></app-squares> -->
+      <!-- <app-background-rotating-rectangles></app-background-rotating-rectangles> -->
+      <!-- <app-liquid-bowl></app-liquid-bowl> -->
+      <!-- <app-pulse></app-pulse> -->
+      <!-- <app-pulse-image></app-pulse-image> -->
+      <!-- <app-autumn></app-autumn> -->
+  </div>
+
+  <div class="body">
+      <div class="cardMain">
+          <div class="box">
+              <img src="./assets/Mario.png">
+              <h3>Today is</h3>
+              <p>{{ todayIs }}</p>
+          </div>
+          <div class="box">
+              <img src="./assets/Luigi.png">
+              <h3>Quotes</h3>
+              <div *ngFor="let q of quotes">
+                  <p *ngIf="q.visible">{{ q.quote }}</p>
+              </div>
+          </div>
+          <div class="box">
+              <img src="./assets/Peach.png" style="transform: scaleX(-1)">
+              <h3>CET</h3>
+              <p>{{ CET }}</p>
+          </div>
+          <div class="box">
+              <img src="./assets/Mushroom.png">
+              <h3>IST</h3>
+              <p>{{ IST }}</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="footer">
+      <div class="weekDayImages">
+          <div *ngFor="let dummy of [].constructor(7); let i = index">
+              <div [ngClass]="i === dayOfWeekNumber ? 'active' : 'inactive'">
+                  <img src="{{ getDayImageByInteger(i) }}" class="{{ getDaysStringByInteger(i) }}">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!--
+  TEAM MARIO PAGE VERSION 2
+-->
+
+<div *ngIf="!httpCallCompletes">
+    <app-liquid-bowl></app-liquid-bowl>
+</div>
+
+<!-- <section id="glyphiconsBackground">
+    <div *ngFor="let dummy of [].constructor(1); let i = index">
+        <div class="iconRow">
+            <div>
+                <fa-icon [icon]="faCoffee"></fa-icon>
+                <fa-icon [icon]="faCodeFork"></fa-icon>
+                <fa-icon [icon]="faUserSecret"></fa-icon>
+                <fa-icon [icon]="faMicrochip"></fa-icon>
+                <fa-icon [icon]="faCodeBranch"></fa-icon>
+                <fa-icon [icon]="faTerminal"></fa-icon>
+                <fa-icon [icon]="faCodeMerge"></fa-icon>
+                <fa-icon [icon]="faCodeCompare"></fa-icon>
+                <fa-icon [icon]="faBugSlash"></fa-icon>
+                <fa-icon [icon]="faGhost"></fa-icon>
+                <fa-icon [icon]="faUserAstronaut"></fa-icon>
+                <fa-icon [icon]="faRocket"></fa-icon>
+                <fa-icon [icon]="faSkullCrossbones"></fa-icon>
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                <fa-icon [icon]="faPaperPlane"></fa-icon>
+                <fa-icon [icon]="faBullhorn"></fa-icon>
+                <fa-icon [icon]="faBullseye"></fa-icon>
+                <fa-icon [icon]="faAtlas"></fa-icon>
+                <fa-icon [icon]="faAt"></fa-icon>
+            </div>
+            <div>
+                <fa-icon [icon]="faCoffee"></fa-icon>
+                <fa-icon [icon]="faCodeFork"></fa-icon>
+                <fa-icon [icon]="faUserSecret"></fa-icon>
+                <fa-icon [icon]="faMicrochip"></fa-icon>
+                <fa-icon [icon]="faCodeBranch"></fa-icon>
+                <fa-icon [icon]="faTerminal"></fa-icon>
+                <fa-icon [icon]="faCodeMerge"></fa-icon>
+                <fa-icon [icon]="faCodeCompare"></fa-icon>
+                <fa-icon [icon]="faBugSlash"></fa-icon>
+                <fa-icon [icon]="faGhost"></fa-icon>
+                <fa-icon [icon]="faUserAstronaut"></fa-icon>
+                <fa-icon [icon]="faRobot"></fa-icon>
+                <fa-icon [icon]="faRocket"></fa-icon>
+                <fa-icon [icon]="faSkullCrossbones"></fa-icon>
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                <fa-icon [icon]="faPaperPlane"></fa-icon>
+                <fa-icon [icon]="faBullhorn"></fa-icon>
+                <fa-icon [icon]="faBullseye"></fa-icon>
+                <fa-icon [icon]="faAtlas"></fa-icon>
+                <fa-icon [icon]="faAt"></fa-icon>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<div id="versionTwo" class="container" *ngIf="httpCallCompletes">
+
+    <!--
+        Setup for the Vanilla clock
+    -->
+    <svg width="0" height="0" viewBox="0 0 0 0">
+        <defs>
+            <g id="unit-h">
+                <path d="M0 20 L20 40 L180 40 L200 20 L180 0 L20 0 Z"></path>
+            </g>
+            <g id="unit-v">
+                <path d="M20 0 L0 20 L0 180 L20 200 L40 180 L40 20 Z"></path>
+            </g>
+        </defs>
+    </svg>
+
+    <div class="header">
+      <div class="weekDayImages">
+          <div *ngFor="let day of getCurrentDayImageAndAdjacentDays(); let i = index">
+              <div [ngClass]="i === 0 || i === 2 ? i === 0 ? 'left' : 'right' : '' ">
+                  <div [ngClass]="day === dayOfWeekNumber ? 'active' : 'inactive'">
+                      <img img src="{{ getDayImageByInteger(day) }}" class="{{ getDaysStringByInteger(day) }}">
+                      <span>
+                          <h1 [ngClass]="day === dayOfWeekNumber ? 'mainTitle' : 'subTitle'">{{ getDaysStringByInteger(day) }}</h1>
+                          <span class="shadow" *ngIf="day === dayOfWeekNumber"></span>
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="body">
+        <div class="card">
+            <div class="icon">
+                <img src="./assets/Mario.png">
+                <div class="content">
+                    <h1>Today is</h1>
+                    <p>{{ todayIs }}</p>
+                </div>
+            </div>
+        </div>
+
+      <div class="card">
+          <div class="icon">
+              <img src="./assets/Luigi.png">
+              <!-- <div class="shimmer bottomhalf"></div> -->
+              <div class="content">
+                  <h1>Quotes</h1>
+                  <div *ngFor="let q of quotes">
+                      <p *ngIf="q.visible">{{ q.quote }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="card">
+          <div class="icon">
+              <img src="./assets/Peach.png" style="transform: scaleX(-1)">
+              <div class="content">
+                  <h1>CET</h1>                  
+                  <div id="cet" class="vanillaClock">
+                    <div class="hours">
+                        <svg id="cetHourOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="cetHourTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                    <div class="minutes">
+                        <svg id="cetMinuteOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="cetMinuteTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                    <div class="seconds">
+                        <svg id="cetSecondOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="cetSecondTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="card">
+          <div class="icon">
+              <img src="./assets/Mushroom.png">
+              <div class="content">
+                  <h1>IST</h1>
+                  <div id="ist" class="vanillaClock">
+                    <div class="hours">
+                        <svg id="istHourOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="istHourTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                    <div class="minutes">
+                        <svg id="istMinuteOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="istMinuteTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                    <div class="seconds">
+                        <svg id="istSecondOne" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                            <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                            <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                            <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                            <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                            <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                            <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                            <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                        </svg>
+                        <svg id="istSecondTwo" class="digit00" width="50" height="50" viewBox="0 0 260 480">
+                          <use xlink:href="#unit-h" class="segment a" x="30" y="0"></use>
+                          <use xlink:href="#unit-v" class="segment b" x="220" y="30"></use>
+                          <use xlink:href="#unit-v" class="segment c" x="220" y="250"></use>
+                          <use xlink:href="#unit-h" class="segment d" x="30" y="440"></use>
+                          <use xlink:href="#unit-v" class="segment e" x="0" y="250"></use>
+                          <use xlink:href="#unit-v" class="segment f" x="0" y="30"></use>
+                          <use xlink:href="#unit-h" class="segment g" x="30" y="220"></use>
+                      </svg>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="footer">
+  </div>
+</div>

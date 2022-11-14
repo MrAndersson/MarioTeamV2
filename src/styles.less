@@ -1,0 +1,136 @@
+body 
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #222 !important;
+    font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
+}
+
+section {
+    span {
+        position: absolute;
+        pointer-events: none;
+        animation: floatingSquare 5s linear infinite;
+        background: white;
+    
+        /// BALL
+        // top: 0;
+        // border-radius: 50%;
+        // width: 10px;
+        // height: 10px;
+    
+        // &:nth-child(1) {
+        //     height: 100px;
+        //     border-radius: 0%;
+        // }
+    }
+}
+
+section#glyphiconsBackground {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .iconRow {
+        position: relative;
+        // top: -50%;
+        width: 100%;
+        display: flex;
+        padding: 10px 0;
+        white-space: nowrap;
+        // font-size: 64px;
+        // transform: rotate(-30deg);
+    }
+
+    fa-icon {
+        color: rgba(0, 0, 0, 0.5);
+        transition: 1s;
+        padding: 0 5px;
+        user-select: none;
+        cursor: default;
+
+        &:hover {
+            transition: 0s;
+            color: #0f0;   
+            filter: drop-shadow(0 0 25px #0f0);
+        }
+    }
+
+    div > .iconRow > div {
+        animation: animate1 80s linear infinite;
+        animation-delay: -80s;
+        background-color: blue;
+    }
+
+    div > .iconRow > div:nth-child(2) {
+        animation: animate2 80s linear infinite;
+        animation-delay: -40s;
+        background-color: red;
+    }
+
+    // div:nth-child(even) > .iconRow > div {
+    //     animation: animate3 80s linear infinite;
+    //     animation-delay: -80s;
+    // }
+    
+    // div:nth-child(even) > .iconRow > div:nth-child(2)  {
+    //     animation: animate4 80s linear infinite;
+    //     animation-delay: -40s;
+    // }
+}
+
+@keyframes floatingSquare {
+    0%{transform: scale(0) translateY(0) rotate(0deg); opacity: 0;}
+    10%{opacity: 1;}
+    90%{opacity: 1;}
+    100%{transform: scale(1) translateY(-500%) rotate(360deg); opacity: 0;}
+}
+
+@keyframes fallingBall {
+    0%{transform: translateY(0)}
+    100%{transform: translateY(100vh)}
+}
+
+@keyframes animate1 {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes animate3 {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes animate4 {
+    0% {
+        transform: translateX(-200%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
